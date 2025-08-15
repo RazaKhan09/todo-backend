@@ -56,8 +56,8 @@ const loginUser =async(req,res)=>{
     const loggedInUser=await User.findById(existingUser._id).select("-password -refreshToken")
     const options = {
             httpOnly: true,
-            secure: false, // change to true in production
-            sameSite: "lax" // or "none" if cross-site cookies are needed
+            secure: true, // change to true in production
+            sameSite: "none" // or "none" if cross-site cookies are needed
         };
     return res.status(200).cookie("accessToken",accessToken,options).cookie("refreshToken",refreshToken,options).json({
         user:loggedInUser,accessToken,refreshToken
@@ -77,8 +77,8 @@ const logoutUser=async (req,res)=>{
         )
         const options = {
             httpOnly: true,
-            secure: false, // change to true in production
-            sameSite: "lax" // or "none" if cross-site cookies are needed
+            secure: true, // change to true in production
+            sameSite: "none" // or "none" if cross-site cookies are needed
         };
     return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options).json({
         "task":"Logged Out Successfully"
