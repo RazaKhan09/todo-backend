@@ -2,8 +2,12 @@ import express from 'express'
 import cors from 'cors'
 import cookieparser from 'cookie-parser'
 const app = express()
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://myfrontend.netlify.app"
+];
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: allowedOrigins, // frontend URL
   credentials: true               // allow cookies
 
 }))
